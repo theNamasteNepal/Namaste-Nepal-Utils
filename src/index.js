@@ -2,13 +2,24 @@ const { Client, IntentsBitField } = require('discord.js');
 
 const client = new Client({ 
     intents: [
-        IntentsBitField.FLAGS.GUILDS, 
-        IntentsBitField.FLAGS.GUILD_MEMBERS, 
-        IntentsBitField.FLAGS.GUILD_BANS, 
-        IntentsBitField.FLAGS.GUILD_EMOJIS_AND_STICKERS, 
-        IntentsBitField.FLAGS.GUILD_VOICE_STATES, 
-        IntentsBitField.FLAGS.GUILD_MESSAGES,
+        IntentsBitField.Flags.Guilds, 
+        IntentsBitField.Flags.GuildMessages, 
+        IntentsBitField.Flags.GuildMembers, 
+        IntentsBitField.Flags.MessageContent,
     ],
+});
+
+client.on('ready', (c) => {
+    console.log(`Logged in as ${c.user.tag}!`)
+});
+
+client.on('messageCreate', (message) => { 
+    if (message.author.bot) 
+    return;
+
+    if (message.content === 'Hello') {
+        message.reply('Hello');
+    }
 });
 
 client.login(

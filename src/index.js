@@ -24,4 +24,6 @@ client.on('messageCreate', (message) => {
     }
 });
 
+
+//token through replit secret.
 client.login(process.env.TOKEN);

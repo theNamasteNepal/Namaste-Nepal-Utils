@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { Client, IntentsBitField } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder } = require('discord.js');
 
 const client = new Client({ 
     intents: [
@@ -22,8 +22,26 @@ client.on('messageCreate', (message) => {
     if (message.content === 'Hello') {
         message.reply('Hello');
     }
+
+    if (message.content === 'ping') {
+        message.reply('PONG!');
+    }
 });
 
+client.on('interactionCreate', (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
 
-//token through replit secret.
+    if (interaction.commandName === 'pr0file'){
+        const profile = new EmbedBuilder()
+          .setTitle(`${interaction.user.username}`)
+          .setDescription('This is your profile!')
+          .setColor('Random')
+          .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToaa7TEkg9FW0OArp-Oik5NjGYujXrhyVg4MQZcAiySQ&s')
+          
+        interaction.reply({ embeds: [profile] });
+    }
+
+} ) 
+
+//token through secret.
 client.login(process.env.TOKEN);

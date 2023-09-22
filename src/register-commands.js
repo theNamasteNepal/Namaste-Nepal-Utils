@@ -50,7 +50,9 @@ const commands = [
                     {
                         name : "two",
                         value: 2,
-                    },Field
+                    },
+                    {
+                        name: "Three",
                         value: 3,
                     },
                 ]

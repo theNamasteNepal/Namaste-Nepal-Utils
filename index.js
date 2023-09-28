@@ -4,15 +4,14 @@ const { token } = require("./config.json");
 const {Guilds, GuildMembers, GuildMessages} = GatewayIntentBits;
 const {User, Message, GuildMember, ThreadMember, Channel} = Partials;
 
+const {loadEvents} = require('./Handlers/eventHandler')
+
 const client = new Client(
 	{ 
 		intents: [Guilds, GuildMembers, GuildMessages],
 		partials: [User, Message, GuildMember, ThreadMember, Channel],
 	});
 
-
-client.once('ready', (c) => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
+client.login(token).then(() => {
+	loadEvents(client);
 });
-
-client.login(token);
